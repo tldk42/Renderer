@@ -5,5 +5,11 @@
   "dependencies" : [ {
     "name" : "spdlog",
     "version>=" : "1.14.1"
+  }, {
+    "name" : "glad",
+    "version>=" : "0.1.36"
+  }, {
+    "name" : "glfw3",
+    "version>=" : "3.4"
   } ]
 }
