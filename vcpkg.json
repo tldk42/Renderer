@@ -1,0 +1,9 @@
+{
+  "name" : "renderer",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "a1212c93cabaa9c5c36c1ffdb4bddd59fdf31e43",
+  "dependencies" : [ {
+    "name" : "spdlog",
+    "version>=" : "1.14.1"
+  } ]
+}
