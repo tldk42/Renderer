@@ -12,7 +12,15 @@ set(glad_DIR "vcpkg_installed/x64-windows/share/glad")
 
 project(Renderer)
 
-add_executable(Renderer src/main.cpp)
+add_executable(Renderer
+        src/main.cpp
+        src/program.h src/program.cpp
+        src/commonInclude.h src/commonInclude.h
+        src/shader.h src/shader.cpp
+        src/Helper/HelperLibrary.h src/Helper/HelperLibrary.cpp
+        src/context.h src/context.cpp
+        src/buffer.h src/buffer.cpp
+        src/vertexLayout.h src/vertexLayout.cpp)
 
 # vcpkg
 find_package(spdlog CONFIG REQUIRED)
@@ -32,10 +40,6 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
         WINDOW_WIDTH=${WINDOW_WIDTH}
         WINDOW_HEIGHT=${WINDOW_HEIGHT})
 
-## (glfw3)
-#include(Dependecy.cmake)
-#
-#target_include_directories(${PROJECT_NAME} PUBLIC ${DEP_INCLUDE_DIR})
-#target_link_directories(${PROJECT_NAME} PUBLIC ${DEP_LIB_DIR})
-#target_link_libraries(${PROJECT_NAME} PUBLIC ${DEP_LIBS})
-#add_dependencies(${PROJECT_NAME} ${DEP_LIST})
+if (MSVC)
+    target_compile_options(${PROJECT_NAME} PUBLIC /wd4819)
+endif ()

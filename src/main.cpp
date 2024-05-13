@@ -1,6 +1,5 @@
-#include <spdlog/spdlog.h>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "commonInclude.h"
+#include "context.h"
 
 void OnFramebufferSizeChange(GLFWwindow* window, int width, int height)
 {
@@ -68,14 +67,24 @@ int main(int argc, const char** argv)
 	glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
 	glfwSetKeyCallback(window, OnKeyEvent);
 
+	ContextUPtr context = Context::Create();
+	if (!context)
+	{
+		SPDLOG_ERROR("failed to create context");
+		glfwTerminate();
+		return -1;
+	}
+
 	SPDLOG_INFO("Start main loop");
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
-		glClearColor(.0f, .1f, .2f, .0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		//		glClearColor(.0f, .1f, .2f, .0f);
+		//		glClear(GL_COLOR_BUFFER_BIT);
+		context->Render();
 		glfwSwapBuffers(window);
 	}
+	context.reset();
 
 	glfwTerminate();
 	return 0;
